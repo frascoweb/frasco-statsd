@@ -35,11 +35,15 @@ class StatsdFeature(Feature):
             self.client.decr(stat, value, rate)
         self._log('decr', stat, value)
 
-    @action('statsd_gauuge')
+    @action('statsd_gauge')
     def gauge(self, stat, value, rate=1, delta=False):
         if self.client:
             self.client.gauge(stat, value, rate, delta)
         self._log('gauge', stat, value)
+
+    @action('statsd_gauge_incr', default_option='stat')
+    def gauge_incr(self, stat, value=1, rate=1):
+        self.gauge(stat, value, rate, True)
 
     @action('statsd_set')
     def set(self, stat, value, rate=1):
