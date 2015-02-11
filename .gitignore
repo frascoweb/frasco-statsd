@@ -1,0 +1,4 @@
+*.pyc
+/build
+/dist
+/frasco_statsd.egg-info
